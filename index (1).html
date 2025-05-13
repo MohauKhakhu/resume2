@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohau Khakhu - Software Developer Resume</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fef1f5;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .main-content {
+      flex: 1 0 auto;
+    }
+    .footer {
+      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+    }
+    .animate-slide-in {
+      animation: slideIn 0.5s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    .cert-card {
+      perspective: 1000px;
+    }
+    .cert-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .cert-card:hover .cert-card-inner {
+      transform: rotateY(180deg);
+    }
+    .cert-card-front, .cert-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .cert-card-front {
+      background-color: #fff;
+    }
+    .cert-card-back {
+      background-color: #fce7f3;
+      transform: rotateY(180deg);
+      text-align: left;
+      overflow-y: auto;
+    }
+    .flower-bg {
+      background-image: url('img/w2.jpg');
+      background-size: 200px;
+    }
+    .video-card {
+      transition: all 0.3s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/javascript">
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+      return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
+      if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+        try {
+          var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+          var firstSheetName = workbook.SheetNames[0];
+          var worksheet = workbook.Sheets[firstSheetName];
+          var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+          var filteredData = jsonData.filter(row => row.some(filledCell));
+          var headerRowIndex = filteredData.findIndex((row, index) =>
+            row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+          );
+          if (headerRowIndex === -1 || headerRowIndex > 25) {
+            headerRowIndex = 0;
+          }
+          var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+          csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+          return csv;
+        } catch (e) {
+          console.error(e);
+          return "";
+        }
+      }
+      return gk_fileData[filename] || "";
+    }
+  </script>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const navItems = [
+      { name: 'Home', id: 'home' },
+      { name: 'About', id: 'about' },
+      { name: 'Education', id: 'education' },
+      { name: 'Experience', id: 'experience' },
+      { name: 'Certifications', id: 'certifications' },
+      { name: 'Skills', id: 'skills' },
+      { name: 'References', id: 'references' },
+      { name: 'Contact', id: 'contact' },
+    ];
+
+    const App = () => {
+      const [activeTab, setActiveTab] = useState('home');
+      const [isDarkMode, setIsDarkMode] = useState(false);
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+      useEffect(() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setIsDarkMode(prefersDark);
+      }, []);
+
+      const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+      };
+
+      const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+      };
+
+      return (
+        <div className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-pink-100 to-purple-200 flower-bg'} min-h-screen flex flex-col`}>
+          {/* Navigation */}
+          <nav className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg fixed w-full z-20`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between h-16">
+                <div className="flex items-center">
+                  <h1 className="text-xl font-bold text-pink-600">Mohau Khakhu</h1>
+                </div>
+                <div className="hidden sm:flex sm:items-center sm:space-x-4">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveTab(item.id)}
+                      className={`${
+                        activeTab === item.id
+                          ? 'border-pink-500 text-pink-600'
+                          : 'border-transparent text-gray-500 hover:border-pink-300 hover:text-pink-600'
+                      } inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors duration-300 hover-scale`}
+                    >
+                      {item.name}
+                    </button>
+                  ))}
+                  <button
+                    onClick={toggleTheme}
+                    className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white"
+                    aria-label="Toggle theme"
+                  >
+                    {isDarkMode ? '☀️' : '🌙'}
+                  </button>
+                </div>
+                <div className="sm:hidden flex items-center">
+                  <button onClick={toggleMenu} className="text-gray-500 hover:text-gray-700 p-2">
+                    {isMenuOpen ? '✖' : '☰'}
+                  </button>
+                </div>
+              </div>
+            </div>
+            {isMenuOpen && (
+              <div className="sm:hidden bg-white dark:bg-gray-800">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-gray-700 dark:text-white hover:bg-pink-100 dark:hover:bg-pink-900"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+                <button
+                  onClick={toggleTheme}
+                  className="block w-full text-left px-4 py-2 text-gray-700 dark:text-white hover:bg-pink-100 dark:hover:bg-pink-900"
+                >
+                  {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
+                </button>
+              </div>
+            )}
+          </nav>
+
+          {/* Main Content */}
+          <main className="main-content pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {activeTab === 'home' && (
+              <section className="text-center animate-slide-in">
+                <img
+                  src="img/home1.png"
+                  alt="Profile"
+                  className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-pink-300 hover-scale"
+                />
+                <h1 className="text-4xl sm:text-5xl font-bold text-pink-700">Mohau Khakhu</h1>
+                <p className="text-xl text-purple-600 mt-2">Software Developer</p>
+                <p className="mt-4 text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+                  Dedicated and driven software developer with a passion for creating user-focused solutions. Skilled in application development, UI/UX design, and cybersecurity.
+                </p>
+                <div className="mt-6 flex justify-center space-x-4">
+                  <a
+                    href="https://www.linkedin.com/in/mohau-khakhu-482985186/"
+                    className="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition-colors hover-scale"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://github.com/MohauKhakhu"
+                    className="bg-purple-500 text-white px-6 py-2 rounded-full hover:bg-purple-600 transition-colors hover-scale"
+                  >
+                    GitHub
+                  </a>
+                </div>
+                <div className="mt-8">
+                  <a
+                    href="#contact"
+                    onClick={() => setActiveTab('contact')}
+                    className="inline-block bg-pink-600 text-white px-8 py-3 rounded-full hover:bg-pink-700 transition-colors text-lg font-semibold hover-scale"
+                  >
+                    Hire Me
+                  </a>
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'about' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in flex flex-col sm:flex-row items-center gap-6">
+                <img
+                  src="img/home1.png"
+                  alt="Mohau Khakhu"
+                  className="w-48 h-48 rounded-full border-4 border-pink-300 hover-scale"
+                />
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-4">About Me</h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    I am a passionate software developer with hands-on experience in building scalable web applications, designing intuitive user interfaces, and implementing robust cybersecurity measures. My journey in tech is fueled by a commitment to continuous learning and staying abreast of emerging technologies. I thrive in collaborative environments, bringing creativity, technical expertise, and a user-centric approach to every project. My goal is to deliver reliable, innovative, and impactful software solutions that meet modern industry standards.
+                  </p>
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="text-center">
+                      <p className="text-lg font-medium text-purple-600">Languages Spoken</p>
+                      <p className="text-gray-600 dark:text-gray-400">English, Sepedi, Venda, Zulu</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-medium text-purple-600">Driver's License</p>
+                      <p className="text-gray-600 dark:text-gray-400">Code 10 / Code EC1</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'education' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-4">Education</h2>
+                <div className="space-y-6">
+                  {[
+                    {
+                      title: 'Advanced Diploma in Information and Communications Technology (Computer Science)',
+                      institution: 'Tshwane University of Technology',
+                      period: 'February 2024 - Present (Part-time)',
+                    },
+                    {
+                      title: 'National Diploma in Information and Communications Technology (Software Development)',
+                      institution: 'Tshwane University of Technology',
+                      period: 'February 2018 - June 2021',
+                    },
+                    {
+                      title: 'National Senior Certificate (NSC)',
+                      institution: 'Sefoloko Secondary School',
+                      period: '',
+                    },
+                  ].map((edu, index) => (
+                    <div key={index} className="border-l-4 border-pink-500 pl-4 hover-scale">
+                      <h3 className="text-lg font-medium text-purple-600">{edu.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-400">{edu.institution}</p>
+                      {edu.period && <p className="text-gray-500 dark:text-gray-500">{edu.period}</p>}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'experience' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-4">Professional Experience</h2>
+                <div className="space-y-8">
+                  {[
+                    {
+                      role: 'Software Developer',
+                      company: 'Forge Academy and Labs',
+                      period: 'October 2024 - Present',
+                      tasks: [
+                        'Designing, developing, and testing scalable web applications using modern frameworks.',
+                        'Creating user-friendly interfaces and optimizing UX based on feedback.',
+                        'Implementing RESTful APIs and managing databases for server-side logic.',
+                        'Utilizing Git and GitHub for source code management and collaboration.',
+                      ],
+                    },
+                    {
+                      role: 'Web Developer',
+                      company: 'OL Africa Media Foundation',
+                      period: 'September 2023 - March 2024',
+                      tasks: [
+                        'Developed responsive layouts using HTML5, CSS3, and React.',
+                        'Contributed to wireframes and prototypes using Figma.',
+                        'Performed unit testing and cross-browser compatibility checks.',
+                      ],
+                    },
+                    {
+                      role: 'Graphic Designer',
+                      company: 'Mogwape Business Enterprise',
+                      period: 'September 2022 - August 2023',
+                      tasks: [
+                        'Designed flyers, posters, and websites aligned with brand identity.',
+                        'Developed illustrations, logos, and icons using Adobe Photoshop and Illustrator.',
+                      ],
+                    },
+                    {
+                      role: 'Systems Engineer',
+                      company: 'Bios Data Center',
+                      period: 'June 2022 - September 2022',
+                      tasks: [
+                        'Conducted system assessments and generated technical reports.',
+                        'Assisted in identifying and responding to security incidents.',
+                      ],
+                    },
+                    {
+                      role: 'Technical Support',
+                      company: 'FairPlay Hardware',
+                      period: 'August 2021 - February 2022',
+                      tasks: [
+                        'Diagnosed and resolved hardware, software, and network issues.',
+                        'Provided user support for the Kerridge retail system.',
+                      ],
+                    },
+                  ].map((exp, index) => (
+                    <div key={index} className="border-l-4 border-purple-500 pl-4 hover-scale">
+                      <h3 className="text-lg font-medium text-purple-600">{exp.role}</h3>
+                      <p className="text-gray-600 dark:text-gray-400">{exp.company}</p>
+                      <p className="text-gray-500 dark:text-gray-500">{exp.period}</p>
+                      <ul className="mt-2 text-gray-700 dark:text-gray-300 list-disc list-inside">
+                        {exp.tasks.map((task, i) => (
+                          <li key={i}>{task}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'certifications' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-8">Certifications</h2>
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center">
+                  {[
+                    {
+                      vendor: 'Microsoft',
+                      logo: 'img/mic.jpg',
+                      certs: ['Azure Fundamentals'],
+                    },
+                    {
+                      vendor: 'VMware',
+                      logo: 'img/vmw.webp',
+                      certs: [
+                        'VSP - Foundation',
+                        'VSP - Business Continuity',
+                        'VSP - Disaster Recovery',
+                        'VTSP - Business Continuity',
+                        'VTSP - Disaster Recovery',
+                        'Ethics and Compliance',
+                      ],
+                    },
+                    {
+                      vendor: 'SUSE',
+                      logo: 'img/suse.jpg',
+                      certs: ['Technical Sales Specialist - SUSE Linux Enterprise Server', 'SUSE Foundation'],
+                    },
+                    {
+                      vendor: 'Nutanix',
+                      logo: 'img/nutanix.jpg',
+                      certs: ['Certified Sales Representative (NCSR)', 'NCSR - Unified Storage Exam'],
+                    },
+                  ].map((cert, index) => (
+                    <div
+                      key={index}
+                      className="cert-card w-full sm:w-60 h-40 flex-shrink-0"
+                    >
+                      <div className="cert-card-inner">
+                        <div className="cert-card-front bg-white shadow-md">
+                          <img
+                            src={cert.logo}
+                            alt={`${cert.vendor} Logo`}
+                            className="h-20 object-contain"
+                          />
+                        </div>
+                        <div className="cert-card-back bg-pink-100 shadow-md">
+                          <div className="p-3">
+                            <h3 className="text-base font-medium text-purple-600">{cert.vendor}</h3>
+                            <ul className="text-gray-700 text-xs mt-1 space-y-1">
+                              {cert.certs.map((c, i) => (
+                                <li key={i}>{c}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'skills' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-4">Skills</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { category: 'Programming Languages', skills: ['C++', 'C#', 'Java', 'Python'] },
+                    { category: 'Web Development', skills: ['HTML', 'CSS', 'JavaScript', 'React.js', 'PHP', 'Bootstrap', 'Tailwind CSS'] },
+                    { category: 'UI/UX Design', skills: ['Figma', 'Adobe XD', 'Canva', 'Responsive Design'] },
+                    { category: 'Databases', skills: ['SQL', 'NoSQL', 'MongoDB', 'PostgreSQL'] },
+                    { category: 'Cloud & Virtualization', skills: ['Microsoft Azure', 'VMware', 'AWS (in progress)'] },
+                    { category: 'Soft Skills', skills: ['Problem-solving', 'Adaptability', 'Communication', 'Teamwork'] },
+                  ].map((skill, index) => (
+                    <div key={index} className="p-4 bg-pink-50 dark:bg-gray-700 rounded-lg hover-scale">
+                      <h3 className="text-lg font-medium text-purple-600">{skill.category}</h3>
+                      <p className="text-gray-600 dark:text-gray-400">{skill.skills.join(', ')}</p>
+                    </div>
+                  ))}
+                </div>
+                <h3 className="text-xl font-semibold text-pink-600 dark:text-pink-400 mt-8 mb-4">Coding Demonstrations</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[
+                    { title: 'React Portfolio Project', src: 'img/home 1.mp4', description: 'Building a responsive portfolio using React and Tailwind CSS.' },
+                    { title: 'API Integration Demo', src: 'img/kali.mp4', description: 'Implementing RESTful API calls in a web application.' },
+                    { title: 'Python Automation Script', src: 'img/python.mp4', description: 'Creating a file processing automation script with Python.' },
+                    { title: 'Code Demonstrations', src: 'img/code.mp4', description: 'Building a responsive website' },
+                  ].map((video, index) => (
+                    <div key={index} className="video-card bg-pink-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover-scale">
+                      <iframe
+                        width="100%"
+                        height="200"
+                        src={video.src}
+                        title={video.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-t-lg"
+                      ></iframe>
+                      <div className="p-4">
+                        <h4 className="text-lg font-medium text-purple-600">{video.title}</h4>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">{video.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'references' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-4">References</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {[
+                    { name: 'Mr. Comfort Mokwena', role: 'Supervisor', company: 'OL Afrika Media Foundation', contact: 'Phone: 0799493791' },
+                    { name: 'Mrs. Pricilla Chewe', role: 'Supervisor', company: 'Mogwape Business Enterprise', contact: 'Email: precillato@gmail.com | Phone: 0748730455' },
+                    { name: 'Mr. Edward Mauba', role: 'Mentor', company: 'Bios Data Center', contact: 'Phone: 0814669869' },
+                    { name: 'Mr. Ben Szluha', role: 'Supervisor', company: 'FairPlay Hardware', contact: 'Phone: 0716136840' },
+                  ].map((ref, index) => (
+                    <div key={index} className="p-4 bg-pink-50 dark:bg-gray-700 rounded-lg hover-scale">
+                      <p className="font-medium text-purple-600">{ref.name}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{ref.role} - {ref.company}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{ref.contact}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {activeTab === 'contact' && (
+              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in text-center">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-pink-600 dark:text-pink-400 mb-4">Contact Me</h2>
+                <p className="text-gray-700 dark:text-gray-300 mb-6">Feel free to reach out for opportunities or inquiries!</p>
+                <div className="space-y-4 max-w-md mx-auto">
+                  <p className="text-gray-600 dark:text-gray-400"><strong>Phone:</strong> +27814688426</p>
+                  <p className="text-gray-600 dark:text-gray-400"><strong>Email:</strong> khakhumohau@gmail.com</p>
+                  <p className="text-gray-600 dark:text-gray-400"><strong>Location:</strong> Gauteng, Johannesburg</p>
+                  <div className="flex justify-center space-x-6">
+                    <a href="https://github.com/MohauKhakhu" className="text-pink-600 dark:text-pink-400 hover:text-pink-800 hover-scale">GitHub</a>
+                    <a href="https://www.linkedin.com/in/mohau-khakhu-482985186/" className="text-pink-600 dark:text-pink-400 hover:text-pink-800 hover-scale">LinkedIn</a>
+                    <a href="https://mohaukhakhu.github.io/mohau.github.io" className="text-pink-600 dark:text-pink-400 hover:text-pink-800 hover-scale">Portfolio</a>
+                  </div>
+                </div>
+                <div className="mt-8">
+                  <p className="text-gray-600 dark:text-gray-400">Send me a message</p>
+                  <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-center">
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      className="px-4 py-2 rounded-lg border border-pink-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      className="px-4 py-2 rounded-lg border border-pink-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                  </div>
+                  <textarea
+                    placeholder="Your Message"
+                    className="mt-4 w-full px-4 py-2 rounded-lg border border-pink-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    rows="4"
+                  ></textarea>
+                  <button
+                    onClick={() => alert('Message sent! (Demo)')}
+                    className="mt-4 bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition-colors hover-scale"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </section>
+            )}
+          </main>
+
+          {/* Footer */}
+          <footer className="footer bg-pink-600 dark:bg-gray-900 text-white py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h3 className="text-lg font-semibold mb-4">Mohau Khakhu</h3>
+              <p className="mb-4">© 2025 Mohau Khakhu. All rights reserved.</p>
+              <div className="flex justify-center space-x-6">
+                <a href="https://github.com/MohauKhakhu" className="hover:text-pink-300 transition-colors hover-scale">GitHub</a>
+                <a href="https://www.linkedin.com/in/mohau-khakhu-482985186/" className="hover:text-pink-300 transition-colors hover-scale">LinkedIn</a>
+                <a href="https://mohaukhakhu.github.io/mohau.github.io" className="hover:text-pink-300 transition-colors hover-scale">Portfolio</a>
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
