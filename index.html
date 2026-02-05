@@ -3,82 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohau Khakhu - Software Developer Resume</title>
+  <title>Mohau Khakhu - Full Stack Developer Resume</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #7c3aed;
+      --accent: #06b6d4;
+      --light: #f8fafc;
+      --dark: #0f172a;
+    }
+    
     body {
       font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
       margin: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
+    
+    .poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+    
     .main-content {
       flex: 1 0 auto;
     }
+    
     .footer {
       flex-shrink: 0;
-      position: sticky;
-      bottom: 0;
       width: 100%;
     }
-    .animate-slide-in {
-      animation: slideIn 0.5s ease-out;
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    @keyframes slideIn {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
     }
-    .hover-scale {
-      transition: transform 0.3s ease;
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+      border-color: var(--primary);
     }
-    .hover-scale:hover {
-      transform: scale(1.03);
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     }
-    .cert-card {
-      perspective: 1000px;
+    
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .cert-card-inner {
+    
+    .skill-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+    
+    .skill-level {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 4px;
+    }
+    
+    .timeline-item {
       position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
+      padding-left: 2rem;
     }
-    .cert-card:hover .cert-card-inner {
-      transform: rotateY(180deg);
-    }
-    .cert-card-front, .cert-card-back {
+    
+    .timeline-item::before {
+      content: '';
       position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 0.75rem;
+      left: 0;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1.5rem;
+      bottom: -1.5rem;
+      width: 2px;
+      background: #e2e8f0;
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .pulse-dot {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
-    }
-    .cert-card-front {
-      background-color: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    .cert-card-back {
-      background-color: #f0f9ff;
-      transform: rotateY(180deg);
-      text-align: left;
-      overflow-y: auto;
-    }
-    .video-card {
-      transition: all 0.3s ease;
-    }
-    .video-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      color: var(--primary);
     }
   </style>
 </head>
@@ -120,409 +195,646 @@
     const { useState, useEffect } = React;
 
     const navItems = [
-      { name: 'Home', id: 'home' },
-      { name: 'About', id: 'about' },
-      { name: 'Education', id: 'education' },
-      { name: 'Experience', id: 'experience' },
-      { name: 'Certifications', id: 'certifications' },
-      { name: 'Skills', id: 'skills' },
-      { name: 'Contact', id: 'contact' },
+      { name: 'Home', id: 'home', icon: '🏠' },
+      { name: 'About', id: 'about', icon: '👨‍💻' },
+      { name: 'Experience', id: 'experience', icon: '💼' },
+      { name: 'Skills', id: 'skills', icon: '⚡' },
+      { name: 'Projects', id: 'projects', icon: '🚀' },
+      { name: 'Education', id: 'education', icon: '🎓' },
+      { name: 'Certifications', id: 'certifications', icon: '🏆' },
+      { name: 'Contact', id: 'contact', icon: '📞' },
     ];
 
     const App = () => {
       const [activeTab, setActiveTab] = useState('home');
-      const [isDarkMode, setIsDarkMode] = useState(false);
       const [isMenuOpen, setIsMenuOpen] = useState(false);
 
       useEffect(() => {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setIsDarkMode(prefersDark);
+        const handleScroll = () => {
+          const sections = navItems.map(item => document.getElementById(item.id));
+          const scrollPos = window.scrollY + 100;
+          
+          sections.forEach(section => {
+            if (section) {
+              const { offsetTop, offsetHeight } = section;
+              if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
+                setActiveTab(section.id);
+              }
+            }
+          });
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
       }, []);
-
-      const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-      };
 
       const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
       };
 
+      const scrollToSection = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          setIsMenuOpen(false);
+        }
+      };
+
       return (
-        <div className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'} min-h-screen flex flex-col`}>
+        <div className="min-h-screen flex flex-col">
           {/* Navigation */}
-          <nav className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg fixed w-full z-20`}>
+          <nav className="glass-effect fixed w-full z-50 shadow-lg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between h-16">
-                <div className="flex items-center">
-                  <h1 className="text-xl font-semibold text-blue-600">Mohau Khakhu</h1>
+              <div className="flex justify-between h-20 items-center">
+                <div className="flex items-center space-x-2">
+                  <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">MK</span>
+                  </div>
+                  <h1 className="text-xl font-bold gradient-text poppins">Mohau Khakhu</h1>
                 </div>
-                <div className="hidden sm:flex sm:items-center sm:space-x-4">
+                
+                <div className="hidden md:flex items-center space-x-1">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => setActiveTab(item.id)}
+                      onClick={() => scrollToSection(item.id)}
                       className={`${
                         activeTab === item.id
-                          ? 'border-blue-500 text-blue-300'
-                          : 'border-transparent text-gray-600 hover:border-blue-300 hover:text-blue-600'
-                      } inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors duration-300 hover-scale`}
+                          ? 'text-primary bg-blue-50 border-blue-200'
+                          : 'text-gray-600 hover:text-primary hover:bg-blue-50'
+                      } inline-flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 border`}
                     >
+                      <span className="mr-2">{item.icon}</span>
                       {item.name}
                     </button>
                   ))}
-                  <button
-                    onClick={toggleTheme}
-                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
-                    aria-label="Toggle theme"
-                  >
-                    {isDarkMode ? '☀️' : '🌙'}
-                  </button>
                 </div>
-                <div className="sm:hidden flex items-center">
-                  <button onClick={toggleMenu} className="text-gray-600 hover:text-gray-800 p-2">
-                    {isMenuOpen ? '✖' : '☰'}
+                
+                <div className="md:hidden">
+                  <button onClick={toggleMenu} className="text-gray-700 p-2">
+                    {isMenuOpen ? '✕' : '☰'}
                   </button>
                 </div>
               </div>
             </div>
+            
             {isMenuOpen && (
-              <div className="sm:hidden bg-white dark:bg-gray-800">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setActiveTab(item.id);
-                      setIsMenuOpen(false);
-                    }}
-                    className="block w-full text-left px-4 py-2 text-gray-700 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900"
-                  >
-                    {item.name}
-                  </button>
-                ))}
-                <button
-                  onClick={toggleTheme}
-                  className="block w-full text-left px-4 py-2 text-gray-700 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900"
-                >
-                  {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
-                </button>
+              <div className="md:hidden bg-white border-t">
+                <div className="px-4 py-3 space-y-1">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg"
+                    >
+                      <span className="mr-3">{item.icon}</span>
+                      {item.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </nav>
 
           {/* Main Content */}
-          <main className="main-content pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            {activeTab === 'home' && (
-              <section className="text-center animate-slide-in">
-                <img
-                  src="img/home1.png"
-                  alt="Profile"
-                  className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-blue-200 hover-scale"
-                />
-                <h1 className="text-4xl sm:text-5xl font-bold text-blue-700">Mohau Khakhu</h1>
-                <p className="text-xl text-blue-600 mt-2">Software Developer</p>
-                <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                  Dedicated and driven software developer with a passion for creating user-focused solutions. Skilled in application development, UI/UX design, and cybersecurity.
-                </p>
-                <div className="mt-6 flex justify-center space-x-4">
-                  <a
-                    href="https://www.linkedin.com/in/mohau-khakhu-482985186/"
-                    className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors hover-scale"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    href="https://github.com/MohauKhakhu"
-                    className="bg-gray-700 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors hover-scale"
-                  >
-                    GitHub
-                  </a>
-                </div>
-                <div className="mt-8">
-                  <a
-                    href="#contact"
-                    onClick={() => setActiveTab('contact')}
-                    className="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors text-lg font-semibold hover-scale"
-                  >
-                    Contact Me
-                  </a>
-                </div>
-              </section>
-            )}
-
-            {activeTab === 'about' && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in flex flex-col sm:flex-row items-center gap-8">
-                <img
-                  src="img/home1.png"
-                  alt="Mohau Khakhu"
-                  className="w-48 h-48 rounded-full border-4 border-blue-200 hover-scale"
-                />
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400 mb-4">About Me</h2>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    I am a passionate software developer with hands-on experience in building scalable web applications, designing intuitive user interfaces, and implementing robust cybersecurity measures. My journey in tech is fueled by a commitment to continuous learning and staying abreast of emerging technologies. I thrive in collaborative environments, bringing creativity, technical expertise, and a user-centric approach to every project. My goal is to deliver reliable, innovative, and impactful software solutions that meet modern industry standards.
-                  </p>
-                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <p className="text-lg font-medium text-blue-600">Languages Spoken</p>
-                      <p className="text-gray-600 dark:text-gray-400">English, Sepedi, Venda, Zulu</p>
+          <main className="main-content pt-20">
+            {/* Hero Section */}
+            <section id="home" className="py-20 gradient-bg text-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="animate-float">
+                    <img
+                      src="img/home1.png"
+                      alt="Mohau Khakhu"
+                      className="w-64 h-64 rounded-full mx-auto md:mx-0 border-8 border-white/20 shadow-2xl"
+                    />
+                  </div>
+                  <div>
+                    <div className="badge mb-4">
+                      <span className="pulse-dot">●</span> Available for opportunities
                     </div>
-                    <div className="text-center">
-                      <p className="text-lg font-medium text-blue-600">Driver's License</p>
-                      <p className="text-gray-600 dark:text-gray-400">Code 10 / Code EC1</p>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 poppins">Mohau Khakhu</h1>
+                    <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-blue-100">
+                      Full Stack Developer & UI/UX Designer
+                    </h2>
+                    <p className="text-lg text-blue-100 mb-8 leading-relaxed">
+                      Dedicated and driven Full-Stack Developer with hands-on experience in application development, 
+                      UI/UX design, and cybersecurity. Passionate about creating user-focused solutions that align 
+                      with modern design principles and industry standards.
+                    </p>
+                    <div className="flex flex-wrap gap-4">
+                      <a href="#contact" onClick={() => scrollToSection('contact')} className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-lg">
+                        Contact Me
+                      </a>
+                      <a href="https://github.com/MohauKhakhu" target="_blank" className="bg-white/10 border border-white/20 px-8 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all">
+                        View GitHub
+                      </a>
                     </div>
                   </div>
                 </div>
-              </section>
-            )}
+              </div>
+            </section>
 
-            {activeTab === 'education' && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Education</h2>
-                <div className="space-y-6">
-                  {[
-                    {
-                      title: 'Advanced Diploma in Information and Communications Technology (Computer Science)',
-                      institution: 'Tshwane University of Technology',
-                      period: 'February 2024 - Present (Part-time)',
-                    },
-                    {
-                      title: 'National Diploma in Information and Communications Technology (Software Development)',
-                      institution: 'Tshwane University of Technology',
-                      period: 'February 2018 - June 2021',
-                    },
-                    {
-                      title: 'National Senior Certificate (NSC)',
-                      institution: 'Sefoloko Secondary School',
-                      period: '',
-                    },
-                  ].map((edu, index) => (
-                    <div key={index} className="border-l-4 border-blue-500 pl-4 hover-scale">
-                      <h3 className="text-lg font-medium text-blue-600">{edu.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400">{edu.institution}</p>
-                      {edu.period && <p className="text-gray-500 dark:text-gray-500">{edu.period}</p>}
-                    </div>
-                  ))}
+            {/* About Section */}
+            <section id="about" className="py-20 bg-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">About Me</h2>
+                  <p className="text-gray-600 max-w-3xl mx-auto">
+                    A versatile developer with a passion for continuous learning and staying current with emerging technologies
+                  </p>
                 </div>
-              </section>
-            )}
+                
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="card-hover bg-gray-50 p-8 rounded-2xl">
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Personal Details</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center">
+                        <div className="icon-wrapper mr-4">
+                          📍
+                        </div>
+                        <div>
+                          <p className="font-semibold">Location</p>
+                          <p className="text-gray-600">Johannesburg, Gauteng</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="icon-wrapper mr-4">
+                          📧
+                        </div>
+                        <div>
+                          <p className="font-semibold">Email</p>
+                          <p className="text-gray-600">khakhumohau@gmail.com</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="icon-wrapper mr-4">
+                          📱
+                        </div>
+                        <div>
+                          <p className="font-semibold">Phone</p>
+                          <p className="text-gray-600">+27 81 468 8426</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="icon-wrapper mr-4">
+                          🗣️
+                        </div>
+                        <div>
+                          <p className="font-semibold">Languages</p>
+                          <p className="text-gray-600">English, Sepedi, Venda, Zulu</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="card-hover bg-gray-50 p-8 rounded-2xl">
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Professional Summary</h3>
+                    <p className="text-gray-600 mb-6">
+                      I bring a blend of technical expertise, creative thinking, and an inquisitive approach to every project, 
+                      with a focus on delivering reliable, scalable, and user-friendly solutions. Skilled in creating 
+                      user-focused applications that align with modern design principles and industry standards.
+                    </p>
+                    <div className="flex items-center">
+                      <div className="icon-wrapper mr-4">
+                        🚗
+                      </div>
+                      <div>
+                        <p className="font-semibold">Driver's License</p>
+                        <p className="text-gray-600">Code 10 / Code EC1</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-            {activeTab === 'experience' && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Professional Experience</h2>
-                <div className="space-y-8">
+            {/* Experience Section - UPDATED TO MATCH RESUME */}
+            <section id="experience" className="py-20 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Professional Experience</h2>
+                  <p className="text-gray-600 max-w-3xl mx-auto">
+                    Hands-on experience in software development, system engineering, and web development
+                  </p>
+                </div>
+                
+                <div className="max-w-4xl mx-auto">
                   {[
                     {
-                      role: 'Software Developer',
+                      role: 'Intermediate Software Developer (Contract)',
+                      company: 'Jalsu Tech',
+                      period: 'Sep 2025 - Current',
+                      tasks: [
+                        'Lead software project lifecycles, translating client vision into delivered solutions',
+                        'Architect, develop, and deploy scalable, secure web applications using modern frameworks',
+                        'Engineer intuitive user interfaces (UI/UX) and robust backend APIs',
+                        'Manage project deployments on cloud platforms (AWS, Afrihost) and databases',
+                        'Develop and integrate custom features for marketing, lead capture, and business growth',
+                        'Direct project timelines, resource allocation, and stakeholder communication'
+                      ]
+                    },
+                    {
+                      role: 'Junior Software Developer (Contract)',
                       company: 'Forge Academy and Labs',
-                      period: 'October 2024 - Present',
+                      period: 'Oct 2024 - Nov 2025',
                       tasks: [
-                        'Designing, developing, and testing scalable web applications using modern frameworks.',
-                        'Creating user-friendly interfaces and optimizing UX based on feedback.',
-                        'Implementing RESTful APIs and managing databases for server-side logic.',
-                        'Utilizing Git and GitHub for source code management and collaboration.',
-                      ],
+                        'Design, develop, and deploy scalable, secure web applications',
+                        'Engineer responsive user interfaces and robust RESTful APIs',
+                        'Manage cloud hosting (AWS and Afrihost), databases, and deployment',
+                        'Implement technical SEO best practices and optimize performance',
+                        'Build tools to capture leads, support sales funnels, and drive marketing growth',
+                        'Utilize Git/GitHub for version control in Agile/Scrum teams',
+                        'Pursuing AWS Cloud Practitioner and CompTIA CySA+ certifications'
+                      ]
                     },
                     {
-                      role: 'Web Developer',
-                      company: 'OL Africa Media Foundation',
-                      period: 'September 2023 - March 2024',
+                      role: 'Junior Web Developer (Contract)',
+                      company: 'OL Afrika Media Foundation',
+                      period: 'Sep 2023 - Mar 2024',
                       tasks: [
-                        'Developed responsive layouts using HTML5, CSS3, and React.',
-                        'Contributed to wireframes and prototypes using Figma.',
-                        'Performed unit testing and cross-browser compatibility checks.',
-                      ],
-                    },
-                    {
-                      role: 'Graphic Designer',
-                      company: 'Mogwape Business Enterprise',
-                      period: 'September 2022 - August 2023',
-                      tasks: [
-                        'Designed flyers, posters, and websites aligned with brand identity.',
-                        'Developed illustrations, logos, and icons using Adobe Photoshop and Illustrator.',
-                      ],
+                        'Engineer responsive, high-performance web interfaces with HTML5, CSS3, and React',
+                        'Translate design mockups into clean, maintainable code',
+                        'Contribute to wireframing and prototyping in Figma',
+                        'Optimize UI performance and resolve bugs through rigorous testing',
+                        'Develop and deploy client websites with modern frameworks',
+                        'Build and maintain backend systems, databases, and APIs'
+                      ]
                     },
                     {
                       role: 'Systems Engineer',
                       company: 'Bios Data Center',
-                      period: 'June 2022 - September 2022',
+                      period: 'Jun 2022 - Sep 2022',
                       tasks: [
-                        'Conducted system assessments and generated technical reports.',
-                        'Assisted in identifying and responding to security incidents.',
-                      ],
-                    },
-                    {
-                      role: 'Technical Support',
-                      company: 'FairPlay Hardware',
-                      period: 'August 2021 - February 2022',
-                      tasks: [
-                        'Diagnosed and resolved hardware, software, and network issues.',
-                        'Provided user support for the Kerridge retail system.',
-                      ],
-                    },
+                        'Strengthened expertise in system security, risk management, and compliance',
+                        'Performed system security assessments and authored technical reports',
+                        'Monitored system integrity and maintained comprehensive activity logs',
+                        'Enforced security best practices and tracked system changes'
+                      ]
+                    }
                   ].map((exp, index) => (
-                    <div key={index} className="border-l-4 border-blue-500 pl-4 hover-scale">
-                      <h3 className="text-lg font-medium text-blue-600">{exp.role}</h3>
-                      <p className="text-gray-600 dark:text-gray-400">{exp.company}</p>
-                      <p className="text-gray-500 dark:text-gray-500">{exp.period}</p>
-                      <ul className="mt-2 text-gray-600 dark:text-gray-300 list-disc list-inside">
-                        {exp.tasks.map((task, i) => (
-                          <li key={i}>{task}</li>
-                        ))}
-                      </ul>
+                    <div key={index} className="timeline-item mb-12">
+                      <div className="card-hover bg-white p-6 rounded-xl shadow-sm">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                          <div>
+                            <h3 className="text-xl font-bold text-gray-800">{exp.role}</h3>
+                            <p className="text-primary font-semibold">{exp.company}</p>
+                          </div>
+                          <span className="badge self-start md:self-auto mt-2 md:mt-0">{exp.period}</span>
+                        </div>
+                        <ul className="space-y-2">
+                          {exp.tasks.map((task, i) => (
+                            <li key={i} className="flex items-start text-gray-600">
+                              <span className="text-primary mr-2">▸</span>
+                              {task}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   ))}
                 </div>
-              </section>
-            )}
+              </div>
+            </section>
 
-            {activeTab === 'certifications' && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400 mb-8">Certifications</h2>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center">
+            {/* Skills Section */}
+            <section id="skills" className="py-20 bg-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Technical Skills</h2>
+                  <p className="text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive skill set across full stack development, cloud platforms, and UI/UX design
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[
+                    {
+                      category: 'Programming Languages',
+                      skills: ['Python', 'Java', 'C#', 'C++', 'JavaScript', 'PHP', 'SQL'],
+                      level: 95
+                    },
+                    {
+                      category: 'Frameworks & Libraries',
+                      skills: ['.NET', 'Spring Boot', 'Node.js', 'React.js', 'Blazor', 'Flutter', '.NET MAUI'],
+                      level: 90
+                    },
+                    {
+                      category: 'Web Technologies',
+                      skills: ['HTML5', 'CSS3', 'XML', 'Bootstrap', 'Tailwind CSS', 'RESTful APIs', 'SOAP'],
+                      level: 92
+                    },
+                    {
+                      category: 'Cloud & Databases',
+                      skills: ['AWS', 'Microsoft Azure', 'PostgreSQL', 'MongoDB', 'SQL', 'NoSQL'],
+                      level: 85
+                    },
+                    {
+                      category: 'UI/UX Design',
+                      skills: ['Figma', 'Adobe XD', 'Responsive Design', 'User-Centered Design'],
+                      level: 88
+                    },
+                    {
+                      category: 'Tools & Methodologies',
+                      skills: ['Git/GitHub', 'Agile/Scrum', 'Microsoft Project', 'Zendesk', 'Slack'],
+                      level: 90
+                    }
+                  ].map((skillGroup, index) => (
+                    <div key={index} className="card-hover bg-gray-50 p-6 rounded-xl">
+                      <h3 className="text-lg font-bold mb-4 text-gray-800">{skillGroup.category}</h3>
+                      <div className="space-y-3 mb-4">
+                        {skillGroup.skills.map((skill, i) => (
+                          <span key={i} className="inline-block bg-white text-gray-700 px-3 py-1 rounded-full text-sm mr-2 mb-2 border">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-sm text-gray-600">Proficiency</span>
+                          <span className="text-sm font-semibold text-primary">{skillGroup.level}%</span>
+                        </div>
+                        <div className="skill-bar">
+                          <div className="skill-level" style={{ width: `${skillGroup.level}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Projects Section */}
+            <section id="projects" className="py-20 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Key Projects</h2>
+                  <p className="text-gray-600 max-w-3xl mx-auto">
+                    Notable projects showcasing technical expertise and problem-solving abilities
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[
+                    {
+                      title: 'Invoicing System',
+                      company: 'Jalsu Tech',
+                      period: 'Sep 2025 - Present',
+                      description: 'Custom financial management system with automated statements and real-time reporting',
+                      tech: ['.NET', 'React', 'PostgreSQL'],
+                      result: 'Improved operational efficiency by automating manual processes'
+                    },
+                    {
+                      title: 'Booking System',
+                      company: 'Jalsu Tech',
+                      period: 'Sep 2025 - Dec 2025',
+                      description: 'Scalable scheduling platform with automated notifications and calendar integration',
+                      tech: ['Node.js', 'React', 'MongoDB'],
+                      result: 'Reduced scheduling errors with user-friendly reservation flows'
+                    },
+                    {
+                      title: 'Supplier Development System',
+                      company: 'Jalsu Tech',
+                      period: 'Sep 2025 - Present',
+                      description: 'Enterprise-level management system for supplier onboarding and tracking',
+                      tech: ['.NET', 'Blazor', 'SQL Server'],
+                      result: 'Enhanced compliance reporting and stakeholder visibility'
+                    },
+                    {
+                      title: 'B-BBEE Calculator Portal',
+                      company: 'Forge Academy & Labs',
+                      period: 'Mar 2025 - Aug 2025',
+                      description: 'Compliance web portal with automated scorecard calculations',
+                      tech: ['React', 'Node.js', 'MongoDB'],
+                      result: 'Enabled efficient tracking of organizational compliance'
+                    },
+                    {
+                      title: 'Corporate Websites',
+                      company: 'Forge Academy & Labs',
+                      period: 'Oct 2024 - Nov 2025',
+                      description: 'Responsive websites focusing on clean UI/UX and brand presence',
+                      tech: ['HTML5', 'CSS3', 'React', 'WordPress'],
+                      result: 'Ensured cross-platform performance and accessibility standards'
+                    }
+                  ].map((project, index) => (
+                    <div key={index} className="card-hover bg-white p-6 rounded-xl">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="badge">{project.period}</span>
+                        <span className="text-sm text-gray-500">{project.company}</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 text-gray-800">{project.title}</h3>
+                      <p className="text-gray-600 mb-4">{project.description}</p>
+                      <div className="mb-4">
+                        {project.tech.map((tech, i) => (
+                          <span key={i} className="inline-block bg-blue-50 text-primary text-xs px-2 py-1 rounded mr-2 mb-2">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="pt-4 border-t">
+                        <p className="text-sm text-gray-600">
+                          <span className="font-semibold">Result:</span> {project.result}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Education Section */}
+            <section id="education" className="py-20 bg-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Education</h2>
+                </div>
+                
+                <div className="max-w-4xl mx-auto space-y-8">
+                  {[
+                    {
+                      degree: 'Advanced Diploma in ICT (Computer Science)',
+                      school: 'Tshwane University of Technology',
+                      details: 'Integrated Software Development, Distributed Programming, Data Structures, Data Science, Software Engineering'
+                    },
+                    {
+                      degree: 'National Diploma in ICT (Software Development)',
+                      school: 'Tshwane University of Technology',
+                      details: 'Development Software, Computing Systems, Technical Programming, Information Systems'
+                    },
+                    {
+                      degree: 'National Senior Certificate (NSC)',
+                      school: 'Sefoloko Secondary School',
+                      details: ''
+                    }
+                  ].map((edu, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="icon-wrapper mr-6 flex-shrink-0">
+                        🎓
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-800">{edu.degree}</h3>
+                        <p className="text-primary font-semibold mt-1">{edu.school}</p>
+                        {edu.details && <p className="text-gray-600 mt-2">{edu.details}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Certifications Section */}
+            <section id="certifications" className="py-20 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Certifications</h2>
+                </div>
+                
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
                     {
                       vendor: 'Microsoft',
                       logo: 'img/mic.jpg',
                       certs: ['Azure Fundamentals'],
+                      color: 'bg-blue-50 border-blue-200'
                     },
                     {
                       vendor: 'VMware',
                       logo: 'img/vmw.webp',
-                      certs: [
-                        'VSP - Foundation',
-                        'VSP - Business Continuity',
-                        'VSP - Disaster Recovery',
-                        'VTSP - Business Continuity',
-                        'VTSP - Disaster Recovery',
-                        'Ethics and Compliance',
-                      ],
+                      certs: ['VSP - Foundation', 'VSP - Business Continuity', 'VSP - Disaster Recovery'],
+                      color: 'bg-purple-50 border-purple-200'
                     },
                     {
                       vendor: 'SUSE',
                       logo: 'img/suse.jpg',
-                      certs: ['Technical Sales Specialist - SUSE Linux Enterprise Server', 'SUSE Foundation'],
+                      certs: ['Technical Sales Specialist', 'SUSE Foundation'],
+                      color: 'bg-green-50 border-green-200'
                     },
                     {
                       vendor: 'Nutanix',
                       logo: 'img/nutanix.jpg',
-                      certs: ['Certified Sales Representative (NCSR)', 'NCSR - Unified Storage Exam'],
-                    },
+                      certs: ['Certified Sales Representative', 'NCSR - Unified Storage'],
+                      color: 'bg-orange-50 border-orange-200'
+                    }
                   ].map((cert, index) => (
-                    <div
-                      key={index}
-                      className="cert-card w-full sm:w-60 h-40 flex-shrink-0"
-                    >
-                      <div className="cert-card-inner">
-                        <div className="cert-card-front bg-white shadow-md">
-                          <img
-                            src={cert.logo}
-                            alt={`${cert.vendor} Logo`}
-                            className="h-20 object-contain"
-                          />
+                    <div key={index} className={`card-hover ${cert.color} border p-6 rounded-xl`}>
+                      <div className="flex items-center mb-4">
+                        <img src={cert.logo} alt={cert.vendor} className="h-12 w-auto mr-4" />
+                        <h3 className="text-lg font-bold text-gray-800">{cert.vendor}</h3>
+                      </div>
+                      <ul className="space-y-2">
+                        {cert.certs.map((c, i) => (
+                          <li key={i} className="flex items-center text-gray-600">
+                            <span className="text-primary mr-2">✓</span>
+                            {c}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact" className="py-20 gradient-bg text-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 poppins">Let's Connect</h2>
+                  <p className="text-blue-100 max-w-2xl mx-auto">
+                    I'm always open to discussing new opportunities, projects, or just having a chat about technology
+                  </p>
+                </div>
+                
+                <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-xl font-bold mb-6">Contact Information</h3>
+                      <div className="space-y-6">
+                        <div className="flex items-center">
+                          <div className="icon-wrapper mr-4 bg-white/20">
+                            📱
+                          </div>
+                          <div>
+                            <p className="font-semibold">Phone</p>
+                            <p className="text-blue-100">+27 81 468 8426</p>
+                          </div>
                         </div>
-                        <div className="cert-card-back bg-blue-50 shadow-md">
-                          <div className="p-3">
-                            <h3 className="text-base font-medium text-blue-600">{cert.vendor}</h3>
-                            <ul className="text-gray-600 text-xs mt-1 space-y-1">
-                              {cert.certs.map((c, i) => (
-                                <li key={i}>{c}</li>
-                              ))}
-                            </ul>
+                        <div className="flex items-center">
+                          <div className="icon-wrapper mr-4 bg-white/20">
+                            📧
+                          </div>
+                          <div>
+                            <p className="font-semibold">Email</p>
+                            <p className="text-blue-100">khakhumohau@gmail.com</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="icon-wrapper mr-4 bg-white/20">
+                            📍
+                          </div>
+                          <div>
+                            <p className="font-semibold">Location</p>
+                            <p className="text-blue-100">Johannesburg, Gauteng</p>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {activeTab === 'skills' && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Skills</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { category: 'Programming Languages', skills: ['C++', 'C#', 'Java', 'Python'] },
-                    { category: 'Web Development', skills: ['HTML', 'CSS', 'JavaScript', 'React.js', 'PHP', 'Bootstrap', 'Tailwind CSS'] },
-                    { category: 'UI/UX Design', skills: ['Figma', 'Adobe XD', 'Canva', 'Responsive Design'] },
-                    { category: 'Databases', skills: ['SQL', 'NoSQL', 'MongoDB', 'PostgreSQL'] },
-                    { category: 'Cloud & Virtualization', skills: ['Microsoft Azure', 'VMware', 'AWS (in progress)'] },
-                    { category: 'Soft Skills', skills: ['Problem-solving', 'Adaptability', 'Communication', 'Teamwork'] },
-                  ].map((skill, index) => (
-                    <div key={index} className="p-4 bg-blue-50 dark:bg-gray-700 rounded-lg hover-scale">
-                      <h3 className="text-lg font-medium text-blue-600">{skill.category}</h3>
-                      <p className="text-gray-600 dark:text-gray-400">{skill.skills.join(', ')}</p>
-                    </div>
-                  ))}
-                </div>
-                <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 mt-8 mb-4">Coding Demonstrations</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[
-                    { title: 'React Portfolio Project', src: 'img/home 1.mp4', description: 'Building a responsive portfolio using React and Tailwind CSS.' },
-                    { title: 'Configuring a virtual Matchine', src: 'img/kali.mp4', description: 'Configuring a VM network connections.' },
-                    { title: 'Python Automation Script', src: 'img/python.mp4', description: 'Creating a file processing automation script with Python.' },
-                    { title: 'Code Demonstrations', src: 'img/code.mp4', description: 'Building a responsive website' },
-                    { title: 'responsive web calculator', src: 'img/calculator.mp4', description: 'Building a responsive calculator with react.js' },
-                    { title: 'First BBBEE calculator', src: 'img/bbbee2.mp4', description: 'Developed a BBBEE calculator' },
-                    { title: 'Second BBBEE calculator', src: 'img/bbbee.mp4', description: 'Developed a BBBEE calculator' },
-                  ].map((video, index) => (
-                    <div key={index} className="video-card bg-blue-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover-scale">
-                      <iframe
-                        width="100%"
-                        height="200"
-                        src={video.src}
-                        title={video.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-t-lg"
-                      ></iframe>
-                      <div className="p-4">
-                        <h4 className="text-lg font-medium text-blue-600">{video.title}</h4>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm">{video.description}</p>
+                    
+                    <div>
+                      <h3 className="text-xl font-bold mb-6">Quick Links</h3>
+                      <div className="space-y-4">
+                        <a href="https://github.com/MohauKhakhu" target="_blank" className="flex items-center p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all">
+                          <span className="mr-3">💻</span>
+                          <span>GitHub Portfolio</span>
+                        </a>
+                        <a href="https://linkedin.com/in/mohaukhakhu-482985186" target="_blank" className="flex items-center p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all">
+                          <span className="mr-3">👔</span>
+                          <span>LinkedIn Profile</span>
+                        </a>
+                        <a href="mohaukhakhu.github.io/resume2/" target="_blank" className="flex items-center p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all">
+                          <span className="mr-3">📄</span>
+                          <span>View Full Resume</span>
+                        </a>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {activeTab === 'contact' && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 animate-slide-in text-center">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Contact Me</h2>
-                <p className="text-gray-600 dark:text-gray-300 mb-8">I'm excited to connect for opportunities or inquiries!</p>
-                <div className="space-y-6 max-w-md mx-auto">
-                  <div className="flex items-center justify-center space-x-3">
-                    <span className="text-blue-600">📞</span>
-                    <p className="text-gray-600 dark:text-gray-400"><strong>Phone:</strong> +27814688426</p>
                   </div>
-                  <div className="flex items-center justify-center space-x-3">
-                    <span className="text-blue-600">✉️</span>
-                    <p className="text-gray-600 dark:text-gray-400"><strong>Email:</strong> khakhumohau@gmail.com</p>
-                  </div>
-                  <div className="flex items-center justify-center space-x-3">
-                    <span className="text-blue-600">📍</span>
-                    <p className="text-gray-600 dark:text-gray-400"><strong>Location:</strong> Gauteng, Johannesburg</p>
-                  </div>
-                  <div className="flex justify-center space-x-8">
-                    <a href="https://github.com/MohauKhakhu" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 hover-scale">GitHub</a>
-                    <a href="https://www.linkedin.com/in/mohau-khakhu-482985186/" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 hover-scale">LinkedIn</a>
-                    <a href="https://mohaukhakhu.github.io/mohau.github.io" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 hover-scale">Portfolio</a>
+                  
+                  <div className="mt-12 pt-8 border-t border-white/20 text-center">
+                    <p className="text-blue-100">References available upon request</p>
                   </div>
                 </div>
-              </section>
-            )}
+              </div>
+            </section>
           </main>
 
           {/* Footer */}
-          <footer className="footer bg-blue-600 dark:bg-gray-900 text-white py-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h3 className="text-lg font-semibold mb-4">Mohau Khakhu</h3>
-              <p className="mb-4">© 2025 Mohau Khakhu. All rights reserved.</p>
-              <div className="flex justify-center space-x-6">
-                <a href="https://github.com/MohauKhakhu" className="hover:text-blue-300 transition-colors hover-scale">GitHub</a>
-                <a href="https://www.linkedin.com/in/mohau-khakhu-482985186/" className="hover:text-blue-300 transition-colors hover-scale">LinkedIn</a>
-                <a href="https://mohaukhakhu.github.io/mohau.github.io" className="hover:text-blue-300 transition-colors hover-scale">Portfolio</a>
+          <footer className="footer bg-gray-900 text-white py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row justify-between items-center">
+                <div className="mb-6 md:mb-0">
+                  <h3 className="text-xl font-bold mb-2 poppins">Mohau Khakhu</h3>
+                  <p className="text-gray-400">Full Stack Developer & UI/UX Designer</p>
+                </div>
+                
+                <div className="flex space-x-6">
+                  <a href="https://github.com/MohauKhakhu" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                    GitHub
+                  </a>
+                  <a href="https://linkedin.com/in/mohaukhakhu-482985186" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                    LinkedIn
+                  </a>
+                  <a href="mohaukhakhu.github.io/resume2/" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                    Portfolio
+                  </a>
+                </div>
+              </div>
+              
+              <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>© {new Date().getFullYear()} Mohau Khakhu. All rights reserved.</p>
+                <p className="mt-2 text-sm">Designed with React & Tailwind CSS</p>
               </div>
             </div>
           </footer>
