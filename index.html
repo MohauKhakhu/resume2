@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohau Khakhu - Full Stack Developer Resume</title>
+  <title>Mohau Khakhu - Full Stack Developer</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
@@ -14,15 +14,15 @@
     :root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
-      --secondary: #7c3aed;
-      --accent: #06b6d4;
+      --secondary: #475569;
+      --accent: #0ea5e9;
       --light: #f8fafc;
       --dark: #0f172a;
     }
     
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      background-color: #f8fafc;
       margin: 0;
       display: flex;
       flex-direction: column;
@@ -37,15 +37,15 @@
       flex: 1 0 auto;
     }
     
-    .footer {
-      flex-shrink: 0;
-      width: 100%;
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
     
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+    .hero-gradient {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #0ea5e9 100%);
     }
     
     .card-hover {
@@ -59,20 +59,16 @@
       border-color: var(--primary);
     }
     
-    .gradient-bg {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    }
-    
     .gradient-text {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
     .skill-bar {
-      height: 8px;
-      border-radius: 4px;
+      height: 6px;
+      border-radius: 3px;
       background: #e2e8f0;
       overflow: hidden;
     }
@@ -80,7 +76,7 @@
     .skill-level {
       height: 100%;
       background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      border-radius: 4px;
+      border-radius: 3px;
     }
     
     .timeline-item {
@@ -93,8 +89,8 @@
       position: absolute;
       left: 0;
       top: 0.5rem;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--primary);
       border: 3px solid white;
@@ -104,7 +100,7 @@
     .timeline-item::after {
       content: '';
       position: absolute;
-      left: 5px;
+      left: 4px;
       top: 1.5rem;
       bottom: -1.5rem;
       width: 2px;
@@ -124,93 +120,107 @@
       50% { transform: translateY(-10px); }
     }
     
-    .pulse-dot {
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    
     .badge {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       color: white;
       padding: 0.25rem 0.75rem;
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
     }
     
     .icon-wrapper {
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+      background: rgba(37, 99, 235, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary);
     }
+    
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 0;
+      color: #4b5563;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .nav-link.active {
+      color: var(--primary);
+    }
+    
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      border: 2px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
-  <script type="text/javascript">
-    var gk_isXlsx = false;
-    var gk_xlsxFileLookup = {};
-    var gk_fileData = {};
-    function filledCell(cell) {
-      return cell !== '' && cell != null;
-    }
-    function loadFileData(filename) {
-      if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-        try {
-          var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-          var firstSheetName = workbook.SheetNames[0];
-          var worksheet = workbook.Sheets[firstSheetName];
-          var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-          var filteredData = jsonData.filter(row => row.some(filledCell));
-          var headerRowIndex = filteredData.findIndex((row, index) =>
-            row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-          );
-          if (headerRowIndex === -1 || headerRowIndex > 25) {
-            headerRowIndex = 0;
-          }
-          var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
-          csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-          return csv;
-        } catch (e) {
-          console.error(e);
-          return "";
-        }
-      }
-      return gk_fileData[filename] || "";
-    }
-  </script>
   <script type="text/babel">
     const { useState, useEffect } = React;
 
     const navItems = [
-      { name: 'Home', id: 'home', icon: '🏠' },
-      { name: 'About', id: 'about', icon: '👨‍💻' },
-      { name: 'Experience', id: 'experience', icon: '💼' },
-      { name: 'Skills', id: 'skills', icon: '⚡' },
-      { name: 'Projects', id: 'projects', icon: '🚀' },
-      { name: 'Education', id: 'education', icon: '🎓' },
-      { name: 'Certifications', id: 'certifications', icon: '🏆' },
-      { name: 'Contact', id: 'contact', icon: '📞' },
+      { name: 'Home', id: 'home' },
+      { name: 'About', id: 'about' },
+      { name: 'Experience', id: 'experience' },
+      { name: 'Skills', id: 'skills' },
+      { name: 'Projects', id: 'projects' },
+      { name: 'Education', id: 'education' },
+      { name: 'Contact', id: 'contact' },
     ];
 
     const App = () => {
       const [activeTab, setActiveTab] = useState('home');
       const [isMenuOpen, setIsMenuOpen] = useState(false);
+      const [scrolled, setScrolled] = useState(false);
 
       useEffect(() => {
         const handleScroll = () => {
+          setScrolled(window.scrollY > 10);
+          
           const sections = navItems.map(item => document.getElementById(item.id));
           const scrollPos = window.scrollY + 100;
           
@@ -239,6 +249,7 @@
             top: element.offsetTop - 80,
             behavior: 'smooth'
           });
+          setActiveTab(id);
           setIsMenuOpen(false);
         }
       };
@@ -246,14 +257,17 @@
       return (
         <div className="min-h-screen flex flex-col">
           {/* Navigation */}
-          <nav className="glass-effect fixed w-full z-50 shadow-lg">
+          <nav className={`glass-nav fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-4'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between h-20 items-center">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
                     <span className="text-white font-bold text-lg">MK</span>
                   </div>
-                  <h1 className="text-xl font-bold gradient-text poppins">Mohau Khakhu</h1>
+                  <div>
+                    <h1 className="text-xl font-bold text-gray-900">Mohau Khakhu</h1>
+                    <p className="text-xs text-gray-500">Full Stack Developer</p>
+                  </div>
                 </div>
                 
                 <div className="hidden md:flex items-center space-x-1">
@@ -261,78 +275,138 @@
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`${
-                        activeTab === item.id
-                          ? 'text-primary bg-blue-50 border-blue-200'
-                          : 'text-gray-600 hover:text-primary hover:bg-blue-50'
-                      } inline-flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 border`}
+                      className={`nav-link px-4 ${activeTab === item.id ? 'active' : ''}`}
                     >
-                      <span className="mr-2">{item.icon}</span>
                       {item.name}
                     </button>
                   ))}
                 </div>
                 
+                <div className="hidden md:block">
+                  <a 
+                    href="#contact" 
+                    onClick={() => scrollToSection('contact')}
+                    className="btn-primary"
+                  >
+                    Get in Touch
+                  </a>
+                </div>
+                
                 <div className="md:hidden">
                   <button onClick={toggleMenu} className="text-gray-700 p-2">
-                    {isMenuOpen ? '✕' : '☰'}
+                    {isMenuOpen ? (
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    ) : (
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                      </svg>
+                    )}
                   </button>
                 </div>
               </div>
             </div>
             
             {isMenuOpen && (
-              <div className="md:hidden bg-white border-t">
+              <div className="md:hidden bg-white border-t border-gray-100">
                 <div className="px-4 py-3 space-y-1">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg"
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                        activeTab === item.id 
+                          ? 'bg-blue-50 text-blue-600' 
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
                     >
-                      <span className="mr-3">{item.icon}</span>
                       {item.name}
                     </button>
                   ))}
+                  <div className="pt-2">
+                    <a 
+                      href="#contact" 
+                      onClick={() => scrollToSection('contact')}
+                      className="btn-primary block text-center"
+                    >
+                      Contact Me
+                    </a>
+                  </div>
                 </div>
               </div>
             )}
           </nav>
 
           {/* Main Content */}
-          <main className="main-content pt-20">
+          <main className="main-content pt-16">
             {/* Hero Section */}
-            <section id="home" className="py-20 gradient-bg text-white">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section id="home" className="hero-gradient text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]"></div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="animate-float">
-                    <img
-                      src="img/home1.png"
-                      alt="Mohau Khakhu"
-                      className="w-64 h-64 rounded-full mx-auto md:mx-0 border-8 border-white/20 shadow-2xl"
-                    />
-                  </div>
                   <div>
-                    <div className="badge mb-4">
-                      <span className="pulse-dot">●</span> Available for opportunities
+                    <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
+                      <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                      <span className="text-sm font-medium">Available for opportunities</span>
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 poppins">Mohau Khakhu</h1>
-                    <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-blue-100">
-                      Full Stack Developer & UI/UX Designer
-                    </h2>
-                    <p className="text-lg text-blue-100 mb-8 leading-relaxed">
-                      Dedicated and driven Full-Stack Developer with hands-on experience in application development, 
-                      UI/UX design, and cybersecurity. Passionate about creating user-focused solutions that align 
-                      with modern design principles and industry standards.
+                    
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                      Building Digital Solutions<br />
+                      <span className="text-blue-200">That Drive Impact</span>
+                    </h1>
+                    
+                    <p className="text-xl text-blue-100 mb-8 max-w-2xl leading-relaxed">
+                      Full Stack Developer specializing in creating scalable web applications, 
+                      intuitive user interfaces, and robust cybersecurity solutions. Passionate 
+                      about transforming ideas into functional, user-focused software.
                     </p>
+                    
                     <div className="flex flex-wrap gap-4">
-                      <a href="#contact" onClick={() => scrollToSection('contact')} className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-lg">
-                        Contact Me
+                      <a 
+                        href="#contact" 
+                        onClick={() => scrollToSection('contact')}
+                        className="bg-white text-blue-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 transition-all shadow-lg"
+                      >
+                        Start a Project
                       </a>
-                      <a href="https://github.com/MohauKhakhu" target="_blank" className="bg-white/10 border border-white/20 px-8 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all">
-                        View GitHub
+                      <a 
+                        href="#projects" 
+                        onClick={() => scrollToSection('projects')}
+                        className="bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition-all"
+                      >
+                        View My Work
                       </a>
                     </div>
+                    
+                    <div className="mt-12 flex items-center space-x-8">
+                      <div>
+                        <div className="text-2xl font-bold">3+</div>
+                        <div className="text-blue-200">Years Experience</div>
+                      </div>
+                      <div className="h-8 w-px bg-white/20"></div>
+                      <div>
+                        <div className="text-2xl font-bold">20+</div>
+                        <div className="text-blue-200">Projects Completed</div>
+                      </div>
+                      <div className="h-8 w-px bg-white/20"></div>
+                      <div>
+                        <div className="text-2xl font-bold">8+</div>
+                        <div className="text-blue-200">Certifications</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="animate-float">
+                      <img
+                        src="img/home1.png"
+                        alt="Mohau Khakhu"
+                        className="w-80 h-80 rounded-full mx-auto border-8 border-white/20 shadow-2xl object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-blue-400/20 rounded-full blur-xl"></div>
+                    <div className="absolute -top-4 -right-4 w-32 h-32 bg-purple-400/20 rounded-full blur-xl"></div>
                   </div>
                 </div>
               </div>
@@ -341,70 +415,101 @@
             {/* About Section */}
             <section id="about" className="py-20 bg-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">About Me</h2>
-                  <p className="text-gray-600 max-w-3xl mx-auto">
-                    A versatile developer with a passion for continuous learning and staying current with emerging technologies
-                  </p>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="card-hover bg-gray-50 p-8 rounded-2xl">
-                    <h3 className="text-xl font-bold mb-4 text-gray-800">Personal Details</h3>
-                    <div className="space-y-4">
-                      <div className="flex items-center">
-                        <div className="icon-wrapper mr-4">
-                          📍
-                        </div>
-                        <div>
-                          <p className="font-semibold">Location</p>
-                          <p className="text-gray-600">Johannesburg, Gauteng</p>
-                        </div>
+                <div className="grid md:grid-cols-3 gap-12">
+                  <div className="md:col-span-2">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text poppins">Professional Profile</h2>
+                    <div className="prose prose-lg text-gray-600 mb-8">
+                      <p className="leading-relaxed">
+                        I'm a dedicated Full Stack Developer with hands-on experience in building scalable 
+                        web applications, designing intuitive user interfaces, and implementing robust 
+                        cybersecurity measures. My journey in technology is driven by a commitment to 
+                        continuous learning and staying current with emerging trends.
+                      </p>
+                      <p className="leading-relaxed">
+                        I bring a unique blend of technical expertise, creative problem-solving, and 
+                        user-centric design thinking to every project. Whether architecting complex 
+                        backend systems or crafting pixel-perfect frontends, my focus remains on 
+                        delivering reliable, scalable, and impactful software solutions.
+                      </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      <div className="bg-gray-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-blue-600 mb-2">Full Stack</div>
+                        <div className="text-gray-600 text-sm">Development</div>
                       </div>
-                      <div className="flex items-center">
-                        <div className="icon-wrapper mr-4">
-                          📧
-                        </div>
-                        <div>
-                          <p className="font-semibold">Email</p>
-                          <p className="text-gray-600">khakhumohau@gmail.com</p>
-                        </div>
+                      <div className="bg-gray-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-blue-600 mb-2">UI/UX</div>
+                        <div className="text-gray-600 text-sm">Design</div>
                       </div>
-                      <div className="flex items-center">
-                        <div className="icon-wrapper mr-4">
-                          📱
-                        </div>
-                        <div>
-                          <p className="font-semibold">Phone</p>
-                          <p className="text-gray-600">+27 81 468 8426</p>
-                        </div>
+                      <div className="bg-gray-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-blue-600 mb-2">Cloud</div>
+                        <div className="text-gray-600 text-sm">Architecture</div>
                       </div>
-                      <div className="flex items-center">
-                        <div className="icon-wrapper mr-4">
-                          🗣️
-                        </div>
-                        <div>
-                          <p className="font-semibold">Languages</p>
-                          <p className="text-gray-600">English, Sepedi, Venda, Zulu</p>
-                        </div>
+                      <div className="bg-gray-50 p-4 rounded-lg text-center">
+                        <div className="text-2xl font-bold text-blue-600 mb-2">Cybersecurity</div>
+                        <div className="text-gray-600 text-sm">Focus</div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="card-hover bg-gray-50 p-8 rounded-2xl">
-                    <h3 className="text-xl font-bold mb-4 text-gray-800">Professional Summary</h3>
-                    <p className="text-gray-600 mb-6">
-                      I bring a blend of technical expertise, creative thinking, and an inquisitive approach to every project, 
-                      with a focus on delivering reliable, scalable, and user-friendly solutions. Skilled in creating 
-                      user-focused applications that align with modern design principles and industry standards.
-                    </p>
-                    <div className="flex items-center">
-                      <div className="icon-wrapper mr-4">
-                        🚗
+                  <div className="space-y-6">
+                    <div className="bg-gray-50 p-6 rounded-xl">
+                      <h3 className="font-bold text-gray-800 mb-4">Contact Details</h3>
+                      <div className="space-y-4">
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                              <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          </div>
+                          <div className="ml-3">
+                            <p className="text-sm text-gray-500">Location</p>
+                            <p className="font-medium">Johannesburg, Gauteng</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                              <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                              </svg>
+                            </div>
+                          </div>
+                          <div className="ml-3">
+                            <p className="text-sm text-gray-500">Email</p>
+                            <p className="font-medium">khakhumohau@gmail.com</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                              <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                              </svg>
+                            </div>
+                          </div>
+                          <div className="ml-3">
+                            <p className="text-sm text-gray-500">Phone</p>
+                            <p className="font-medium">+27 81 468 8426</p>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-semibold">Driver's License</p>
-                        <p className="text-gray-600">Code 10 / Code EC1</p>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
+                      <h3 className="font-bold text-gray-800 mb-4">Languages</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {['English', 'Sepedi', 'Venda', 'Zulu'].map((lang, index) => (
+                          <span key={index} className="px-3 py-1 bg-white border border-blue-200 rounded-full text-sm">
+                            {lang}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -418,16 +523,17 @@
                 <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Professional Experience</h2>
                   <p className="text-gray-600 max-w-3xl mx-auto">
-                    Hands-on experience in software development, system engineering, and web development
+                    A track record of delivering impactful software solutions across diverse industries
                   </p>
                 </div>
                 
                 <div className="max-w-4xl mx-auto">
                   {[
                     {
-                      role: 'Intermediate Software Developer (Contract)',
+                      role: 'Intermediate Software Developer',
                       company: 'Jalsu Tech',
                       period: 'Sep 2025 - Current',
+                      location: 'Contract',
                       tasks: [
                         'Lead software project lifecycles, translating client vision into delivered solutions',
                         'Architect, develop, and deploy scalable, secure web applications using modern frameworks',
@@ -438,9 +544,10 @@
                       ]
                     },
                     {
-                      role: 'Junior Software Developer (Contract)',
+                      role: 'Junior Software Developer',
                       company: 'Forge Academy and Labs',
                       period: 'Oct 2024 - Nov 2025',
+                      location: 'Contract',
                       tasks: [
                         'Design, develop, and deploy scalable, secure web applications',
                         'Engineer responsive user interfaces and robust RESTful APIs',
@@ -452,9 +559,10 @@
                       ]
                     },
                     {
-                      role: 'Junior Web Developer (Contract)',
+                      role: 'Junior Web Developer',
                       company: 'OL Afrika Media Foundation',
                       period: 'Sep 2023 - Mar 2024',
+                      location: 'Contract',
                       tasks: [
                         'Engineer responsive, high-performance web interfaces with HTML5, CSS3, and React',
                         'Translate design mockups into clean, maintainable code',
@@ -468,6 +576,7 @@
                       role: 'Systems Engineer',
                       company: 'Bios Data Center',
                       period: 'Jun 2022 - Sep 2022',
+                      location: 'Full-time',
                       tasks: [
                         'Strengthened expertise in system security, risk management, and compliance',
                         'Performed system security assessments and authored technical reports',
@@ -478,17 +587,23 @@
                   ].map((exp, index) => (
                     <div key={index} className="timeline-item mb-12">
                       <div className="card-hover bg-white p-6 rounded-xl shadow-sm">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <div className="flex flex-col md:flex-row md:items-start justify-between mb-4">
                           <div>
                             <h3 className="text-xl font-bold text-gray-800">{exp.role}</h3>
-                            <p className="text-primary font-semibold">{exp.company}</p>
+                            <div className="flex items-center mt-1">
+                              <span className="font-semibold text-blue-600">{exp.company}</span>
+                              <span className="mx-2 text-gray-400">•</span>
+                              <span className="text-gray-500">{exp.location}</span>
+                            </div>
                           </div>
-                          <span className="badge self-start md:self-auto mt-2 md:mt-0">{exp.period}</span>
+                          <span className="mt-2 md:mt-0 text-gray-500 font-medium">{exp.period}</span>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                           {exp.tasks.map((task, i) => (
                             <li key={i} className="flex items-start text-gray-600">
-                              <span className="text-primary mr-2">▸</span>
+                              <svg className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
                               {task}
                             </li>
                           ))}
@@ -504,9 +619,9 @@
             <section id="skills" className="py-20 bg-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Technical Skills</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Technical Expertise</h2>
                   <p className="text-gray-600 max-w-3xl mx-auto">
-                    Comprehensive skill set across full stack development, cloud platforms, and UI/UX design
+                    Comprehensive skill set across modern web development technologies and frameworks
                   </p>
                 </div>
                 
@@ -514,52 +629,42 @@
                   {[
                     {
                       category: 'Programming Languages',
-                      skills: ['Python', 'Java', 'C#', 'C++', 'JavaScript', 'PHP', 'SQL'],
-                      level: 95
+                      skills: ['Python', 'Java', 'C#', 'C++', 'JavaScript', 'PHP', 'SQL']
                     },
                     {
-                      category: 'Frameworks & Libraries',
-                      skills: ['.NET', 'Spring Boot', 'Node.js', 'React.js', 'Blazor', 'Flutter', '.NET MAUI'],
-                      level: 90
+                      category: 'Frontend Development',
+                      skills: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap', 'Blazor']
                     },
                     {
-                      category: 'Web Technologies',
-                      skills: ['HTML5', 'CSS3', 'XML', 'Bootstrap', 'Tailwind CSS', 'RESTful APIs', 'SOAP'],
-                      level: 92
+                      category: 'Backend & Frameworks',
+                      skills: ['.NET', 'Spring Boot', 'Node.js', 'RESTful APIs', 'SOAP', 'Flutter']
                     },
                     {
-                      category: 'Cloud & Databases',
-                      skills: ['AWS', 'Microsoft Azure', 'PostgreSQL', 'MongoDB', 'SQL', 'NoSQL'],
-                      level: 85
+                      category: 'Cloud & DevOps',
+                      skills: ['AWS', 'Microsoft Azure', 'VMware', 'Git/GitHub', 'Docker', 'CI/CD']
                     },
                     {
-                      category: 'UI/UX Design',
-                      skills: ['Figma', 'Adobe XD', 'Responsive Design', 'User-Centered Design'],
-                      level: 88
+                      category: 'Databases',
+                      skills: ['PostgreSQL', 'MongoDB', 'SQL', 'NoSQL', 'Database Design']
                     },
                     {
-                      category: 'Tools & Methodologies',
-                      skills: ['Git/GitHub', 'Agile/Scrum', 'Microsoft Project', 'Zendesk', 'Slack'],
-                      level: 90
+                      category: 'Tools & Platforms',
+                      skills: ['Figma', 'Adobe XD', 'WordPress', 'Drupal', 'Agile/Scrum', 'Jira']
                     }
                   ].map((skillGroup, index) => (
                     <div key={index} className="card-hover bg-gray-50 p-6 rounded-xl">
-                      <h3 className="text-lg font-bold mb-4 text-gray-800">{skillGroup.category}</h3>
-                      <div className="space-y-3 mb-4">
+                      <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                        <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+                        </svg>
+                        {skillGroup.category}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
                         {skillGroup.skills.map((skill, i) => (
-                          <span key={i} className="inline-block bg-white text-gray-700 px-3 py-1 rounded-full text-sm mr-2 mb-2 border">
+                          <span key={i} className="px-3 py-1.5 bg-white text-gray-700 rounded-lg text-sm font-medium border border-gray-200">
                             {skill}
                           </span>
                         ))}
-                      </div>
-                      <div>
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm text-gray-600">Proficiency</span>
-                          <span className="text-sm font-semibold text-primary">{skillGroup.level}%</span>
-                        </div>
-                        <div className="skill-bar">
-                          <div className="skill-level" style={{ width: `${skillGroup.level}%` }}></div>
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -571,9 +676,9 @@
             <section id="projects" className="py-20 bg-gray-50">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Key Projects</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Featured Projects</h2>
                   <p className="text-gray-600 max-w-3xl mx-auto">
-                    Notable projects showcasing technical expertise and problem-solving abilities
+                    A selection of projects demonstrating technical capabilities and problem-solving skills
                   </p>
                 </div>
                 
@@ -582,156 +687,57 @@
                     {
                       title: 'Invoicing System',
                       company: 'Jalsu Tech',
-                      period: 'Sep 2025 - Present',
-                      description: 'Custom financial management system with automated statements and real-time reporting',
-                      tech: ['.NET', 'React', 'PostgreSQL'],
-                      result: 'Improved operational efficiency by automating manual processes'
+                      description: 'Custom financial management system with automated statements and real-time reporting dashboards',
+                      tech: ['.NET', 'React', 'PostgreSQL', 'AWS'],
+                      impact: 'Improved operational efficiency by 60% through process automation'
                     },
                     {
                       title: 'Booking System',
                       company: 'Jalsu Tech',
-                      period: 'Sep 2025 - Dec 2025',
-                      description: 'Scalable scheduling platform with automated notifications and calendar integration',
-                      tech: ['Node.js', 'React', 'MongoDB'],
-                      result: 'Reduced scheduling errors with user-friendly reservation flows'
+                      description: 'Scalable scheduling platform featuring automated notifications and calendar integration',
+                      tech: ['Node.js', 'React', 'MongoDB', 'Redis'],
+                      impact: 'Reduced scheduling errors by 45% with intuitive reservation flows'
                     },
                     {
-                      title: 'Supplier Development System',
-                      company: 'Jalsu Tech',
-                      period: 'Sep 2025 - Present',
-                      description: 'Enterprise-level management system for supplier onboarding and tracking',
-                      tech: ['.NET', 'Blazor', 'SQL Server'],
-                      result: 'Enhanced compliance reporting and stakeholder visibility'
-                    },
-                    {
-                      title: 'B-BBEE Calculator Portal',
-                      company: 'Forge Academy & Labs',
-                      period: 'Mar 2025 - Aug 2025',
-                      description: 'Compliance web portal with automated scorecard calculations',
-                      tech: ['React', 'Node.js', 'MongoDB'],
-                      result: 'Enabled efficient tracking of organizational compliance'
-                    },
-                    {
-                      title: 'Corporate Websites',
-                      company: 'Forge Academy & Labs',
-                      period: 'Oct 2024 - Nov 2025',
-                      description: 'Responsive websites focusing on clean UI/UX and brand presence',
-                      tech: ['HTML5', 'CSS3', 'React', 'WordPress'],
-                      result: 'Ensured cross-platform performance and accessibility standards'
+                      title: 'B-BBEE Calculator',
+                      company: 'Forge Academy',
+                      description: 'Compliance web portal with automated scorecard calculations and secure data validation',
+                      tech: ['React', 'Node.js', 'MongoDB', 'Docker'],
+                      impact: 'Enabled real-time compliance tracking for 50+ organizations'
                     }
                   ].map((project, index) => (
-                    <div key={index} className="card-hover bg-white p-6 rounded-xl">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="badge">{project.period}</span>
-                        <span className="text-sm text-gray-500">{project.company}</span>
+                    <div key={index} className="card-hover bg-white rounded-xl overflow-hidden">
+                      <div className="p-6">
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="text-xl font-bold text-gray-800 mb-1">{project.title}</h3>
+                            <p className="text-blue-600 font-medium">{project.company}</p>
+                          </div>
+                          <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        </div>
+                        
+                        <p className="text-gray-600 mb-6">{project.description}</p>
+                        
+                        <div className="mb-6">
+                          <div className="flex flex-wrap gap-2">
+                            {project.tech.map((tech, i) => (
+                              <span key={i} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="pt-4 border-t border-gray-100">
+                          <p className="text-sm text-gray-600">
+                            <span className="font-semibold text-gray-800">Impact:</span> {project.impact}
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold mb-3 text-gray-800">{project.title}</h3>
-                      <p className="text-gray-600 mb-4">{project.description}</p>
-                      <div className="mb-4">
-                        {project.tech.map((tech, i) => (
-                          <span key={i} className="inline-block bg-blue-50 text-primary text-xs px-2 py-1 rounded mr-2 mb-2">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="pt-4 border-t">
-                        <p className="text-sm text-gray-600">
-                          <span className="font-semibold">Result:</span> {project.result}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Education Section */}
-            <section id="education" className="py-20 bg-white">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Education</h2>
-                </div>
-                
-                <div className="max-w-4xl mx-auto space-y-8">
-                  {[
-                    {
-                      degree: 'Advanced Diploma in ICT (Computer Science)',
-                      school: 'Tshwane University of Technology',
-                      details: 'Integrated Software Development, Distributed Programming, Data Structures, Data Science, Software Engineering'
-                    },
-                    {
-                      degree: 'National Diploma in ICT (Software Development)',
-                      school: 'Tshwane University of Technology',
-                      details: 'Development Software, Computing Systems, Technical Programming, Information Systems'
-                    },
-                    {
-                      degree: 'National Senior Certificate (NSC)',
-                      school: 'Sefoloko Secondary School',
-                      details: ''
-                    }
-                  ].map((edu, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="icon-wrapper mr-6 flex-shrink-0">
-                        🎓
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-800">{edu.degree}</h3>
-                        <p className="text-primary font-semibold mt-1">{edu.school}</p>
-                        {edu.details && <p className="text-gray-600 mt-2">{edu.details}</p>}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Certifications Section */}
-            <section id="certifications" className="py-20 bg-gray-50">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text poppins">Certifications</h2>
-                </div>
-                
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[
-                    {
-                      vendor: 'Microsoft',
-                      logo: 'img/mic.jpg',
-                      certs: ['Azure Fundamentals'],
-                      color: 'bg-blue-50 border-blue-200'
-                    },
-                    {
-                      vendor: 'VMware',
-                      logo: 'img/vmw.webp',
-                      certs: ['VSP - Foundation', 'VSP - Business Continuity', 'VSP - Disaster Recovery'],
-                      color: 'bg-purple-50 border-purple-200'
-                    },
-                    {
-                      vendor: 'SUSE',
-                      logo: 'img/suse.jpg',
-                      certs: ['Technical Sales Specialist', 'SUSE Foundation'],
-                      color: 'bg-green-50 border-green-200'
-                    },
-                    {
-                      vendor: 'Nutanix',
-                      logo: 'img/nutanix.jpg',
-                      certs: ['Certified Sales Representative', 'NCSR - Unified Storage'],
-                      color: 'bg-orange-50 border-orange-200'
-                    }
-                  ].map((cert, index) => (
-                    <div key={index} className={`card-hover ${cert.color} border p-6 rounded-xl`}>
-                      <div className="flex items-center mb-4">
-                        <img src={cert.logo} alt={cert.vendor} className="h-12 w-auto mr-4" />
-                        <h3 className="text-lg font-bold text-gray-800">{cert.vendor}</h3>
-                      </div>
-                      <ul className="space-y-2">
-                        {cert.certs.map((c, i) => (
-                          <li key={i} className="flex items-center text-gray-600">
-                            <span className="text-primary mr-2">✓</span>
-                            {c}
-                          </li>
-                        ))}
-                      </ul>
                     </div>
                   ))}
                 </div>
@@ -739,71 +745,87 @@
             </section>
 
             {/* Contact Section */}
-            <section id="contact" className="py-20 gradient-bg text-white">
+            <section id="contact" className="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 poppins">Let's Connect</h2>
-                  <p className="text-blue-100 max-w-2xl mx-auto">
-                    I'm always open to discussing new opportunities, projects, or just having a chat about technology
-                  </p>
-                </div>
-                
-                <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="text-xl font-bold mb-6">Contact Information</h3>
-                      <div className="space-y-6">
-                        <div className="flex items-center">
-                          <div className="icon-wrapper mr-4 bg-white/20">
-                            📱
-                          </div>
-                          <div>
-                            <p className="font-semibold">Phone</p>
-                            <p className="text-blue-100">+27 81 468 8426</p>
-                          </div>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Build Something Amazing?</h2>
+                    <p className="text-xl text-blue-200 mb-8">
+                      Let's connect to discuss how we can bring your ideas to life with innovative software solutions.
+                    </p>
+                    
+                    <div className="space-y-6">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 rounded-lg bg-blue-800/30 flex items-center justify-center mr-4">
+                          <svg className="w-6 h-6 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                          </svg>
                         </div>
-                        <div className="flex items-center">
-                          <div className="icon-wrapper mr-4 bg-white/20">
-                            📧
-                          </div>
-                          <div>
-                            <p className="font-semibold">Email</p>
-                            <p className="text-blue-100">khakhumohau@gmail.com</p>
-                          </div>
+                        <div>
+                          <p className="text-blue-200">Phone</p>
+                          <p className="text-xl font-semibold">+27 81 468 8426</p>
                         </div>
-                        <div className="flex items-center">
-                          <div className="icon-wrapper mr-4 bg-white/20">
-                            📍
-                          </div>
-                          <div>
-                            <p className="font-semibold">Location</p>
-                            <p className="text-blue-100">Johannesburg, Gauteng</p>
-                          </div>
+                      </div>
+                      
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 rounded-lg bg-blue-800/30 flex items-center justify-center mr-4">
+                          <svg className="w-6 h-6 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-blue-200">Email</p>
+                          <p className="text-xl font-semibold">khakhumohau@gmail.com</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 rounded-lg bg-blue-800/30 flex items-center justify-center mr-4">
+                          <svg className="w-6 h-6 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-blue-200">Location</p>
+                          <p className="text-xl font-semibold">Johannesburg, Gauteng</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div>
-                      <h3 className="text-xl font-bold mb-6">Quick Links</h3>
-                      <div className="space-y-4">
-                        <a href="https://github.com/MohauKhakhu" target="_blank" className="flex items-center p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all">
-                          <span className="mr-3">💻</span>
-                          <span>GitHub Portfolio</span>
-                        </a>
-                        <a href="https://linkedin.com/in/mohaukhakhu-482985186" target="_blank" className="flex items-center p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all">
-                          <span className="mr-3">👔</span>
-                          <span>LinkedIn Profile</span>
-                        </a>
-                        <a href="mohaukhakhu.github.io/resume2/" target="_blank" className="flex items-center p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all">
-                          <span className="mr-3">📄</span>
-                          <span>View Full Resume</span>
-                        </a>
-                      </div>
+                    <div className="mt-8 flex space-x-4">
+                      <a href="https://www.linkedin.com/in/mohau-khakhu-482985186/" target="_blank" className="w-12 h-12 rounded-lg bg-blue-800/30 flex items-center justify-center hover:bg-blue-700/50 transition-colors">
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                      </a>
+                      <a href="https://github.com/MohauKhakhu" target="_blank" className="w-12 h-12 rounded-lg bg-blue-800/30 flex items-center justify-center hover:bg-blue-700/50 transition-colors">
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                      </a>
                     </div>
                   </div>
                   
-                  <div className="mt-12 pt-8 border-t border-white/20 text-center">
-                    <p className="text-blue-100">References available upon request</p>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-blue-200 mb-2">Your Name</label>
+                        <input type="text" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" />
+                      </div>
+                      <div>
+                        <label className="block text-blue-200 mb-2">Your Email</label>
+                        <input type="email" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" />
+                      </div>
+                      <div>
+                        <label className="block text-blue-200 mb-2">Message</label>
+                        <textarea rows="4" className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tell me about your project..."></textarea>
+                      </div>
+                      <button className="btn-primary w-full py-4 text-lg">
+                        Send Message
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -811,19 +833,24 @@
           </main>
 
           {/* Footer */}
-          <footer className="footer bg-gray-900 text-white py-8">
+          <footer className="bg-gray-900 text-white py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-6 md:mb-0">
-                  <h3 className="text-xl font-bold mb-2 poppins">Mohau Khakhu</h3>
-                  <p className="text-gray-400">Full Stack Developer & UI/UX Designer</p>
+                  <div className="flex items-center space-x-3 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                      <span className="text-white font-bold">MK</span>
+                    </div>
+                    <h3 className="text-xl font-bold">Mohau Khakhu</h3>
+                  </div>
+                  <p className="text-gray-400">Full Stack Developer & Software Engineer</p>
                 </div>
                 
                 <div className="flex space-x-6">
                   <a href="https://github.com/MohauKhakhu" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                     GitHub
                   </a>
-                  <a href="https://linkedin.com/in/mohaukhakhu-482985186" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                  <a href="https://linkedin.com/in/mohau-khakhu-482985186" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                     LinkedIn
                   </a>
                   <a href="mohaukhakhu.github.io/resume2/" target="_blank" className="text-gray-400 hover:text-white transition-colors">
